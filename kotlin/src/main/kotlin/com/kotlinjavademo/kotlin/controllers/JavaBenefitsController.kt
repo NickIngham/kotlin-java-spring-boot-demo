@@ -9,4 +9,14 @@ import org.springframework.web.bind.annotation.RestController
 class JavaBenefitsController {
     @GetMapping("hey-buddy")
     fun helloWorld() : String = "Hey Buddy! Love, Kotlin"
+
+    //null is a separate type
+
+    // streams
+
+    // iterators
+
+    //using Java Classes
+
+    // can convert to jvm bytecode
 }
