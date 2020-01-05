@@ -18,9 +18,9 @@ class VehicleEntity(
 ) {
     fun toDto(): Vehicle = Vehicle(
             make = this.make,
-            registration = this.registration,
             model = this.model,
-            modelYear = this.modelYear
+            modelYear = this.modelYear,
+            registration = this.registration
     )
     companion object {
         fun fromVehicle(vehicle : Vehicle) = VehicleEntity(
