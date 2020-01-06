@@ -12,26 +12,26 @@ class KotlinBenefitsController {
 
     //null is a separate type
     @GetMapping("/nullable")
-    fun NullOperators(): String? {
+    fun nullOperators(): String? {
         // String (non-null String) and String? (nullable String) are two distinct types in Kotlin.
         // This means that the program will not throw a null pointer exception
         // If necessary you can add the operator '!!' after the variable to force a NPE(NullPointerException) check and throw an exception if null
 
-        // if the return type is changed to null then the
+        // if the return type is changed to to just 'String' then the program will not compile
         val toggle = false
         return if (toggle) "string" else null
     }
 
-    // Eager Lists
+    // Eager Lists, behave like streams but are executed immediately and not
     @GetMapping("/lists")
     fun streams() : List<Int>{
         val list = List(5){it * 2}
         return list.filter { it % 4 == 0}
     }
 
-    //Lazy Sequences/Streams
+    //Lazy Sequences, the alternative to java streams
     @GetMapping("/sequences")
-    fun multiStepCollections(): List<Int>{
+    fun sequences(): List<Int>{
         val list = List(100){it}
         return list.asSequence()
                 .filter { it in 20..40 }
@@ -53,7 +53,7 @@ class KotlinBenefitsController {
     // can convert to jvm bytecode
 }
 
-// default values can be used so that parameters become optional for data classes, this can be
+// default values can be used so that parameters become optional for data classes, this can be use for data classes to avoid lots of constructors
 data class Person (
         val title : String,
         val firstName : String? = null,

@@ -20,37 +20,32 @@ class KotlinBenefitsController {
   //null is a separate type
   @GetMapping("/nullable")
   public String NullOperators() {
-    // String (non-null String) and String? (nullable String) are two distinct types in Kotlin.
-    // This means that the program will not throw a null pointer exception
-    // If necessary you can add the operator '!!' after the variable to force a NPE(NullPointerException) check and throw an exception if null
-
-    // if the return type is changed to
+    //here we can still pass back null, but this may not be expected, but it still compiles
+    //other times in java we will get a null pointer exception thrown at run time
     boolean toggle = false;
     return toggle? "string" : null;
   }
 
   // Eager Lists
   @GetMapping("/lists")
-  public List<Integer> streams(){
+  public List<Integer> lists(){
     List<Integer> list = new ArrayList<>();
     for (int i = 0; i < 5; i++) {
       list.add(i * 2);
     }
-
     List<Integer> filteredList = new ArrayList<>();
     for (int integer : list) {
       if (integer % 4 == 0)
         filteredList.add(integer);
     }
-
     return list.stream()
         .filter(integer -> integer % 4 ==0)
         .collect(Collectors.toList());
   }
 
-  //Lazy Sequences/Streams
-  @GetMapping("/sequences")
-  fun multiStepCollections(): List<Int>{
+  //Lazy Streams
+  @GetMapping("/streams")
+  fun streams(): List<Int>{
     val list = List(100){it}
     return list.asSequence()
         .filter { it >= 20 && it >= 40  }

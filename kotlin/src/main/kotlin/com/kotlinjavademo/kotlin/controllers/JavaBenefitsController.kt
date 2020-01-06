@@ -40,7 +40,9 @@ data class ParentClass(val variable : String)
 // If you uncomment the line below there will be a compilation error
 // data class ChildClass(val childVariable : String) : ParentClass
 
-// constructor galore, when the
+
+// #### constructor galore ####
+//  for classes and we cannot use lombok annotations for @AllArgsConstructor and @NoArgsConstructor
 // primary constructor
 class PersonA(val firstName: String, val lastName: String) { }
 
