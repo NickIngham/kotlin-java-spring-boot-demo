@@ -17,9 +17,9 @@ public class VehicleEntity {
     private String registration;
     private String make;
     private String model;
-    private String modelYear;
+    private int modelYear;
 
-    public VehicleEntity(Long id, String registration, String make, String model, String modelYear) {
+    public VehicleEntity(Long id, String registration, String make, String model, int modelYear) {
         this.id = id;
         this.registration = registration;
         this.make = make;
@@ -27,7 +27,7 @@ public class VehicleEntity {
         this.modelYear = modelYear;
     }
 
-    public VehicleEntity(String registration, String make, String model, String modelYear) {
+    public VehicleEntity(String registration, String make, String model, int modelYear) {
         this.registration = registration;
         this.make = make;
         this.model = model;
@@ -60,7 +60,7 @@ public class VehicleEntity {
                 vehicle.getRegistration() != null ? vehicle.getRegistration() : defaultVehicle.getRegistration(),
                 vehicle.getMake() != null ? vehicle.getMake() : defaultVehicle.getMake(),
                 vehicle.getModel() != null ? vehicle.getModel() : defaultVehicle.getModel(),
-                vehicle.getRegistration()
+                vehicle.getModelYear()
         );
     }
 
@@ -96,11 +96,11 @@ public class VehicleEntity {
         this.model = model;
     }
 
-    public String getModelYear() {
+    public int getModelYear() {
         return modelYear;
     }
 
-    public void setModelYear(String modelYear) {
+    public void setModelYear(int modelYear) {
         this.modelYear = modelYear;
     }
 }

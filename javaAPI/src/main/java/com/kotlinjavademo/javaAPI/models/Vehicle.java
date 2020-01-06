@@ -7,10 +7,10 @@ package com.kotlinjavademo.javaAPI.models;
 public class Vehicle {
     private String make;
     private String model;
-    private String modelYear;
+    private int modelYear;
     private String registration ;
 
-    public Vehicle(String make, String model, String modelYear, String registration) {
+    public Vehicle(String make, String model, int modelYear, String registration) {
         this.make = make;
         this.model = model;
         this.modelYear = modelYear;
@@ -36,11 +36,11 @@ public class Vehicle {
         this.model = model;
     }
 
-    public String getModelYear() {
+    public int getModelYear() {
         return modelYear;
     }
 
-    public void setModelYear(String modelYear) {
+    public void setModelYear(int modelYear) {
         this.modelYear = modelYear;
     }
 
