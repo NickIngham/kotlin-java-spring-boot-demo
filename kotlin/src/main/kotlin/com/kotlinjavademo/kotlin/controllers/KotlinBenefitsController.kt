@@ -1,31 +1,57 @@
 package com.kotlinjavademo.kotlin.controllers
 
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/kotlin-benefits")
-class KotlinBenefitsController{
+@RequestMapping("/java-benefits")
+class KotlinBenefitsController {
+    @GetMapping("/hey-buddy")
+    fun helloWorld() : String = "Hey Buddy! Love, Kotlin"
 
-    @GetMapping("/nulls")
-    fun NullOperators(): String? {
-        // String (non-null String) and String? (nullable String) are two distinct types in Kotlin.
-        // This means that the program will not throw a null pointer exception
-        // If necessary you can add the operator '!!' after the variable to force a NPE(NullPointerException) check and throw an exception if null
-
-        // if the return type is changed to
+    //null is a separate type
+    @GetMapping("/nullable")
+    fun nullable() : String? {
         val switch = false
-        return if (switch) "string" else null
+        return if (switch) "String" else null
     }
 
-    //no static member. must use companion objects as a work around,  the companion is a singleton instance
+    // streams
+    @GetMapping("/streams")
+    fun streams() : List<Int>{
+        val list = List(5){it * 2}
+        return list.filter { it % 4 == 0}
+    }
 
-    // all classes are default final, unless you use the open keyword so that the class can be extended
+    //Lazy sequences
+    @GetMapping("/multi-step-collections")
+    fun multiStepCollections(): List<Int>{
+        val list = List(100){it}
+        return list.asSequence()
+                .filter { it >= 20 && it >= 40  }
+                .map { it + 10 }
+                .toList()
+    }
 
-    // constructor galore, but if your simply setting values in the constructor then default values can be used so that parameters become optional
+    // iterators; foreach
+    @GetMapping("/iterators")
+    fun iterators() {
+        val list = List(20){it}
+        for (element in list){
+            if (element % 3 == 0)
+                println("Fizz")
+        }
+    }
+    // using Java Classes
 
-    //data classes, great but half baked, cannot extend data classes, not even using the 'open' keyword
-
-    // summary might be that use the best of both. try out a hybrid, if you prefer data classes in kotlin, then make the data classes in your project kotlin but write the bussiness logic in Java
-
+    // can convert to jvm bytecode
 }
+
+// default values can be used so that parameters become optional for data classes, this can be
+data class Person (
+        val title : String,
+        val firstName : String? = null,
+        val lastName : String,
+        val age : Int = -1
+)
