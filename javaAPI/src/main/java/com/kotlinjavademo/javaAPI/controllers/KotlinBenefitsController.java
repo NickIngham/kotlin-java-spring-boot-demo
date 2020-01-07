@@ -26,7 +26,7 @@ class KotlinBenefitsController {
     return toggle? "string" : null;
   }
 
-  // Eager Lists
+  // #### Eager Lists ####
   @GetMapping("/lists")
   public List<Integer> lists(){
     List<Integer> list = new ArrayList<>();
@@ -43,34 +43,102 @@ class KotlinBenefitsController {
         .collect(Collectors.toList());
   }
 
-  //Lazy Streams
-  @GetMapping("/streams")
-  fun streams(): List<Int>{
-    val list = List(100){it}
-    return list.asSequence()
-        .filter { it >= 20 && it >= 40  }
-                .map { it + 10 }
-                .toList()
+  // the nicere way in java is you can convert to a stream and then back to a list
+  @GetMapping("/lists-stream")
+  public List<Integer> listToStream(){
+    List<Integer> list = new ArrayList<>();
+    for (int i = 0; i < 5; i++) {
+      list.add(i * 2);
+    }
+    return list.stream()
+        .filter(integer -> integer % 4 == 0)
+        .collect(Collectors.toList());
   }
 
-  // iterators; foreach very similar to
-  @GetMapping("/iterators")
-  fun iterators() {
-    val list = List(20){it}
-    for (element in list){
-      if (element % 3 == 0)
-        println("Fizz")
+
+  //#### Lazy Streams ####
+  @GetMapping("/streams")
+  public Stream<Integer> streams() {
+    Stream<Integer> stream = Stream.iterate(0,integer -> integer).limit(100);
+    return stream.filter(integer -> integer >= 20 && integer <= 40)
+                .map(integer -> integer + 10 );
+  }
+
+  //#### switch statements ####
+
+  @GetMapping("/switch")
+  public String switches(){
+    var input = 1;
+    switch (input){
+      case 0:
+        return "switch statements in Java...";
+      case 1:
+        return "...are limited to a single variable...";
+      default:
+        return "...and constant value statements only";
     }
   }
-  // using Java Classes
 
-  // can convert to jvm bytecode
 }
 
-// default values can be used so that parameters become optional for data classes, this can be
-data class Person (
-    val title : String,
-    val firstName : String? = null,
-    val lastName : String,
-    val age : Int = -1
-    )
+//#### Default Values ####
+// you can set default values with variables in the classes in java
+// but then requires it requires a lot of constructors being written and getters and setters
+class Person {
+  private String title;
+  private String firstName = null;
+  private String lastName;
+  private int age;
+
+  public Person(String title, String firstName, String lastName, int age) {
+    this.title = title;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+  }
+
+  public Person(String title, String lastName, int age) {
+    this.title = title;
+    this.lastName = lastName;
+    this.age = age;
+  }
+
+  public Person(String title, String firstName, String lastName) {
+    this.title = title;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = -1;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public int getAge() {
+    return age;
+  }
+
+  public void setAge(int age) {
+    this.age = age;
+  }
+}

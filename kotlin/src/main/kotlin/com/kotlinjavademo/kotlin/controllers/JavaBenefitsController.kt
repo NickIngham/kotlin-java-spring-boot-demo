@@ -66,3 +66,4 @@ class PersonB {
 
 }
 // In summary and the biggest advantage; you can use the best of both languages in the same program. try out a hybrid, if you prefer data classes in kotlin, then make the data classes in your project kotlin but write the business logic in Java
+// Kotlin makes it easier to write code that is short and concise, but it can also be used to produce a mess of seemingly random character combinations
