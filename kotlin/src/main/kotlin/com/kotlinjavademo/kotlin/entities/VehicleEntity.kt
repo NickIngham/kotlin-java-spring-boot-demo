@@ -1,16 +1,14 @@
 package com.kotlinjavademo.kotlin.entities
 
 import com.kotlinjavademo.kotlin.models.Vehicle
-import net.bytebuddy.implementation.bytecode.assign.TypeCasting
-import javax.management.MBeanRegistration
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "vehicle")
 class VehicleEntity(
-        @Id val id : Long? = null,
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        val id : Long? = null,
         val registration: String,
         val make: String,
         val model: String,
@@ -35,8 +33,6 @@ class VehicleEntity(
                 model = vehicle.make ?: default.model,
                 modelYear = vehicle.modelYear ?: default.modelYear,
                 registration = vehicle.registration ?: default.registration
-
         )
      }
-
 }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("java-benefits/")
+@RequestMapping("/java-benefits")
 public class JavaBenefitsController {
     @GetMapping("hey-buddy")
     public String helloWorld(){

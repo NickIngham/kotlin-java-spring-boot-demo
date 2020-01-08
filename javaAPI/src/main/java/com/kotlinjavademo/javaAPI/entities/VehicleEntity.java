@@ -3,6 +3,8 @@ package com.kotlinjavademo.javaAPI.entities;
 import com.kotlinjavademo.javaAPI.models.Vehicle;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,7 +15,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "vehicle")
 public class VehicleEntity {
-    @Id private Long id;
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
     private String registration;
     private String make;
     private String model;

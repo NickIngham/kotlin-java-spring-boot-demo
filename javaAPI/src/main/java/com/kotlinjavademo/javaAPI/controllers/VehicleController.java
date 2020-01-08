@@ -17,6 +17,7 @@ public class VehicleController {
     public List<Vehicle> getAllVehicles() {
         return vehicleService.retrieveAllVehicles();
     }
+
     @GetMapping("/{registration}")
     public Vehicle getVehicleByRegistration(@PathVariable String registration) {
         var vehicle = vehicleService.getVehicleByRegistration(registration);
