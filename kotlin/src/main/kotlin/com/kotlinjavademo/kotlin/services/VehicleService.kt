@@ -9,11 +9,12 @@ import org.springframework.stereotype.Service
 @Service
 class VehicleService (
         @Autowired
-        internal val vehicleRepository: VehicleRepository
+        private val vehicleRepository: VehicleRepository
 ) {
     fun getVehicleByRegistration(registration: String) : Vehicle?{
         return vehicleRepository.getVehicleByRegistration(registration)?.toDto()
     }
+
 
     fun retrieveAllVehicles(): List<Vehicle>{
         return vehicleRepository.findAll().map { it.toDto() }
@@ -25,7 +26,9 @@ class VehicleService (
 
     fun updateVehicle( vehicle: Vehicle) : Vehicle? {
         val currentVehicle = vehicleRepository.getVehicleByRegistration(registration = vehicle.registration)
-        return if (currentVehicle != null ) vehicleRepository.save(VehicleEntity.fromVehicle(vehicle, currentVehicle)).toDto()
-        else null
+        return if (currentVehicle != null )
+            vehicleRepository.save(VehicleEntity.fromVehicle(vehicle, currentVehicle)).toDto()
+        else
+            null
     }
 }
